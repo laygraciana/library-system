@@ -5,9 +5,12 @@
 
 // API 配置
 const API_CONFIG = {
-    BASE_URL: window.location.hostname === 'localhost' 
-        ? 'http://localhost:8080' 
-        : window.location.origin.replace('3000', '8080'),
+    // 如果是本地开发
+    // BASE_URL: 'http://localhost:5000',
+    
+    // 如果是 Vercel 部署，连接到 PythonAnywhere
+    BASE_URL: 'https://Graci.pythonanywhere.com',
+    
     ENDPOINTS: {
         HEALTH: '/api/health',
         BOOKS: '/api/books',
@@ -52,7 +55,7 @@ const elements = {
 
 // 初始化应用
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📚 图书管理系统前端初始化');
+    console.log('📚 图书管理系统前端初始化 - script.js:58');
     
     // 绑定事件
     bindEvents();
@@ -138,7 +141,7 @@ async function checkHealth() {
             elements.healthStatus.innerHTML = '❌ 服务异常 | 数据库未连接';
         }
     } catch (error) {
-        console.error('健康检查失败:', error);
+        console.error('健康检查失败: - script.js:144', error);
         elements.healthStatus.className = 'status-indicator status-unhealthy';
         elements.healthStatus.innerHTML = '❌ 无法连接到后端服务';
     } finally {
@@ -175,7 +178,7 @@ async function loadBooks(page = 1) {
             throw new Error(data.message || '加载失败');
         }
     } catch (error) {
-        console.error('加载图书失败:', error);
+        console.error('加载图书失败: - script.js:181', error);
         elements.booksBody.innerHTML = `
             <tr>
                 <td colspan="6" class="text-center">
@@ -260,7 +263,7 @@ async function loadStats() {
             elements.bookCount.textContent = `总图书: ${data.data.total_books} | 平均价格: ¥${data.data.average_price.toFixed(2)}`;
         }
     } catch (error) {
-        console.error('加载统计失败:', error);
+        console.error('加载统计失败: - script.js:266', error);
         elements.bookCount.textContent = '统计信息加载失败';
     }
 }
@@ -293,7 +296,7 @@ async function initDatabase() {
             throw new Error(data.message);
         }
     } catch (error) {
-        console.error('初始化失败:', error);
+        console.error('初始化失败: - script.js:299', error);
         showNotification(`初始化失败: ${error.message}`, 'error');
     } finally {
         setLoading(elements.initDbBtn, false);
@@ -344,7 +347,7 @@ async function viewBook(bookId) {
             alertModal('图书详情', details);
         }
     } catch (error) {
-        console.error('查看图书失败:', error);
+        console.error('查看图书失败: - script.js:350', error);
         showNotification('获取图书详情失败', 'error');
     }
 }
@@ -379,7 +382,7 @@ async function editBook(bookId) {
             showModal();
         }
     } catch (error) {
-        console.error('编辑图书失败:', error);
+        console.error('编辑图书失败: - script.js:385', error);
         showNotification('获取编辑信息失败', 'error');
     }
 }
@@ -407,7 +410,7 @@ async function deleteBook(bookId) {
             throw new Error(data.message);
         }
     } catch (error) {
-        console.error('删除失败:', error);
+        console.error('删除失败: - script.js:413', error);
         showNotification(`删除失败: ${error.message}`, 'error');
     }
 }
@@ -473,7 +476,7 @@ async function handleFormSubmit(e) {
             throw new Error(data.message);
         }
     } catch (error) {
-        console.error('表单提交失败:', error);
+        console.error('表单提交失败: - script.js:479', error);
         showNotification(`操作失败: ${error.message}`, 'error');
     } finally {
         setLoading(submitBtn, false);
@@ -615,4 +618,4 @@ window.app = {
     showAddBookForm
 };
 
-console.log('✅ 前端脚本加载完成');
+console.log('✅ 前端脚本加载完成 - script.js:621');
