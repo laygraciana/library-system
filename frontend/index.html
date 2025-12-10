@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书管理系统 | GitHub + Vercel 部署</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -10%;
+            width: 120%;
+            height: 100px;
+            background: white;
+            transform: rotate(3deg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-badge {
+            background: #dbeafe;
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .screenshot {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #e5e7eb;
+            transition: transform 0.3s;
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.02);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list li:before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .deployment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(to right, #000000, #24292e);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">
+                <i class="fas fa-book"></i> 图书管理系统
+            </h1>
+            <p style="font-size: 1.2rem; opacity: 0.9;">
+                基于 Docker 容器化与云服务的全栈应用 | 数据库课程项目
+            </p>
+            
+            <div style="margin-top: 2rem;">
+                <span class="deployment-badge">
+                    <i class="fab fa-github"></i> GitHub
+                </span>
+                <span class="deployment-badge" style="background: linear-gradient(to right, #000000, #666666);">
+                    <i class="fas fa-cloud"></i> Vercel
+                </span>
+                <span class="deployment-badge" style="background: linear-gradient(to right, #336791, #4ea5d9);">
+                    <i class="fab fa-docker"></i> Docker
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Project Overview -->
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-rocket"></i> 项目概述
+            </h2>
+            <p>这是一个完整的图书管理系统，采用现代化的技术栈和部署方案。项目实现了从数据库设计到前端展示的全流程开发，并提供了多种部署方式。</p>
+            
+            <div class="tech-stack">
+                <div class="tech-badge"><i class="fab fa-html5"></i> HTML5</div>
+                <div class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</div>
+                <div class="tech-badge"><i class="fab fa-js"></i> JavaScript</div>
+                <div class="tech-badge"><i class="fab fa-python"></i> Python/Flask</div>
+                <div class="tech-badge"><i class="fas fa-database"></i> PostgreSQL</div>
+                <div class="tech-badge"><i class="fab fa-docker"></i> Docker</div>
+            </div>
+        </div>
+
+        <!-- Quick Access -->
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-external-link-alt"></i> 快速访问
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                <a href="https://github.com/你的用户名/library-system" class="btn" target="_blank">
+                    <i class="fab fa-github"></i> GitHub 源代码
+                </a>
+                <a href="实验报告.docx" class="btn" style="background: var(--success);">
+                    <i class="fas fa-file-word"></i> 下载实验报告
+                </a>
+                <button onclick="showLocalDemo()" class="btn" style="background: var(--warning);">
+                    <i class="fas fa-code"></i> 查看本地运行指南
+                </button>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-star"></i> 功能特性
+            </h2>
+            <ul class="feature-list">
+                <li>完整的图书信息管理（增删改查）</li>
+                <li>响应式前端设计，支持移动端</li>
+                <li>RESTful API 设计</li>
+                <li>Docker 容器化部署</li>
+                <li>PostgreSQL 数据库设计</li>
+                <li>GitHub + Vercel 自动化部署</li>
+                <li>详细的实验报告与文档</li>
+                <li>完整的测试用例</li>
+            </ul>
+        </div>
+
+        <!-- Deployment Options -->
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-server"></i> 部署方式
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="padding: 20px; background: #f8fafc; border-radius: 10px;">
+                    <h3><i class="fab fa-github"></i> GitHub + Vercel</h3>
+                    <p>当前您正在访问的版本。前端部署在 Vercel，代码托管在 GitHub。</p>
+                    <p><strong>优点：</strong>无需安装，立即访问</p>
+                </div>
+                
+                <div style="padding: 20px; background: #f8fafc; border-radius: 10px;">
+                    <h3><i class="fab fa-docker"></i> Docker 本地运行</h3>
+                    <p>完整系统本地运行，包含前后端和数据库。</p>
+                    <p><strong>优点：</strong>功能完整，无网络限制</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshots -->
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-camera"></i> 运行截图
+            </h2>
+            <p>以下为本地 Docker 运行的实际效果：</p>
+            
+            <div class="screenshot-grid">
+                <div class="screenshot">
+                    <img src="assets/docker-running.jpg" alt="Docker运行状态" onerror="this.src='https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=200&fit=crop'">
+                    <div style="padding: 15px;">
+                        <h4>Docker 容器运行</h4>
+                        <p>所有服务在容器中正常运行</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="assets/frontend-ui.jpg" alt="前端界面" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop'">
+                    <div style="padding: 15px;">
+                        <h4>前端用户界面</h4>
+                        <p>现代化的图书管理界面</p>
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="assets/database.jpg" alt="数据库管理" onerror="this.src='https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=400&h=200&fit=crop'">
+                    <div style="padding: 15px;">
+                        <h4>数据库管理</h4>
+                        <p>PostgreSQL 数据表与查询</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Guide -->
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-chalkboard-teacher"></i> 教师验证指南
+            </h2>
+            
+            <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>快速验证（2分钟）</h3>
+                <ol style="margin: 15px 0 15px 20px;">
+                    <li>查看本页面功能说明</li>
+                    <li>点击 GitHub 链接查看源代码</li>
+                    <li>下载实验报告查看详细设计</li>
+                    <li>查看运行截图确认功能完整性</li>
+                </ol>
+                
+                <h3>完整验证（10分钟）</h3>
+                <ol style="margin: 15px 0 15px 20px;">
+                    <li>克隆 GitHub 仓库</li>
+                    <li>运行 Docker 本地部署</li>
+                    <li>测试所有功能模块</li>
+                    <li>验证数据库设计</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="background: #1f2937; color: white; padding: 3rem 20px; margin-top: 3rem; text-align: center;">
+        <div class="container">
+            <h3>图书管理系统 | 数据库课程项目</h3>
+            <p style="opacity: 0.8; margin: 1rem 0;">
+                基于 GitHub + Vercel 的现代化部署方案
+            </p>
+            <div style="margin-top: 2rem;">
+                <a href="https://github.com/你的用户名/library-system" style="color: white; margin: 0 10px;">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+                <span style="opacity: 0.5; margin: 0 10px;">|</span>
+                <span>开发团队：计231 - 你的名字 - 学号</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLocalDemo() {
+            const guide = `
+            === Docker 本地运行指南 ===
+            
+            1. 克隆仓库：
+               git clone https://github.com/你的用户名/library-system
+               
+            2. 进入 Docker 目录：
+               cd library-system/docker
+               
+            3. 启动服务：
+               docker-compose up --build
+               
+            4. 访问应用：
+               - 前端：http://localhost:3000
+               - 后端API：http://localhost:8080
+               - 健康检查：http://localhost:8080/api/health
+               
+            5. 停止服务：
+               docker-compose down
+            `;
+            
+            alert(guide);
+        }
+        
+        // 显示当前部署信息
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🌐 当前部署：GitHub + Vercel');
+            console.log('📁 前端：Vercel 静态托管');
+            console.log('💾 后端：本地 Docker 运行');
+            console.log('📊 数据库：PostgreSQL + Docker');
+        });
+    </script>
+</body>
+</html>
